@@ -1,0 +1,17 @@
+install.packages("data.table")
+library(data.table)
+#LendingClub analysis
+data <- read.csv("C:\\Users\\Rob\\Desktop\\Onam\\Onam's work\\R Practice work\\LendingClubClean.csv")
+data <- as.data.table(data)
+names(data)
+#Get the mean, median, max of the loan and funded amount
+summary(data$loan_amnt)
+summary(data$funded_amnt_inv)
+summary(data$fico_range_low )
+summary(data$fico_range_high )
+# Get sum of the amount put in investment funded by state
+# Print the amount invested in each state in decreasing order
+InvAmtbyState <- data[,sum(funded_amnt_inv), by="addr_state"]
+InvAmtbyState[order(V1, decreasing=TRUE)]
+loanAmtbyState <- data[,sum(loan_amnt), by="addr_state"]
+loanAmtbyState[order(V1, decreasing=TRUE)]
